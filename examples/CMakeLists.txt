@@ -24,7 +24,7 @@ if (cisst_FOUND)
   include (${CISST_USE_FILE})
 
   # sawCMUSphinx4 has been compiled within cisst, we should find it automatically
-  # find_package (sawCMUSphinx4 REQUIRED HINTS "${CISST_BINARY_DIR}/saw/components")
+  # find_package (sawCMUSphinx4 REQUIRED HINTS "${cisst_saw_BINARY_DIR}/saw/components")
 
   # example with Qt
   get_filename_component (JAVA_LIBRARY_DIR ${JAVA_AWT_LIBRARY} PATH)
