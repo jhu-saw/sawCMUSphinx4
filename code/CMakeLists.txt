@@ -1,7 +1,7 @@
 #
 # $Id$
 #
-# (C) Copyright 2011 Johns Hopkins University (JHU), All Rights
+# (C) Copyright 2011-2012 Johns Hopkins University (JHU), All Rights
 # Reserved.
 #
 # --- begin cisst license - do not edit ---
@@ -55,12 +55,19 @@ if (cisst_FOUND_AS_REQUIRED)
   file (COPY sawCMUSphinx4.xml.template DESTINATION ${SAW_SPHINX4_TEMPLATE_DIR})
 
   # create configuration file with all wrappers
-  configure_file (mtsCMUSphinx4Config.h.in "${CMAKE_CURRENT_BINARY_DIR}/../mtsCMUSphinx4Config.h" @ONLY)
+  configure_file (mtsCMUSphinx4Config.h.in "${sawCMUSphinx4_BINARY_DIR}/sawCMUSphinx4/mtsCMUSphinx4Config.h" @ONLY)
 
   # core library
+  set (sawCMUSphinx4_INCLUDE_DIR "${sawCMUSphinx4_SOURCE_DIR}/include" "${sawCMUSphinx4_BINARY_DIR}")
+  set (sawCMUSphinx4_LIBRARY_DIR "${LIBRARY_OUTPUT_PATH}")
+  set (sawCMUSphinx4_LIBRARIES sawCMUSphinx4)
+
+  include_directories (${sawCMUSphinx4_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+  set (sawCMUSphinx4_HEADER_DIR "${sawCMUSphinx4_SOURCE_DIR}/include/sawCMUSphinx4")
+
   add_library (sawCMUSphinx4 SHARED
-               ../mtsCMUSphinx4Export.h
-               ../mtsCMUSphinx4.h
+               ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4Export.h
+               ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4.h
                mtsCMUSphinx4Context.cpp
                mtsCMUSphinx4WordActions.cpp
                mtsCMUSphinx4JNI.h
@@ -77,12 +84,13 @@ if (cisst_FOUND_AS_REQUIRED)
     cisst_set_directories (cisstQt)
 
     qt4_wrap_cpp (QT_WRAPPED_CPP
-                  ../mtsCMUSphinx4QtComponent.h ../mtsCMUSphinx4QtWidget.h)
+                  ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4QtComponent.h
+                  ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4QtWidget.h)
 
     add_library (sawCMUSphinx4Qt SHARED
-                 ../mtsCMUSphinx4ExportQt.h
-                 ../mtsCMUSphinx4QtComponent.h
-                 ../mtsCMUSphinx4QtWidget.h
+                 ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4ExportQt.h
+                 ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4QtComponent.h
+                 ${sawCMUSphinx4_HEADER_DIR}/mtsCMUSphinx4QtWidget.h
                  mtsCMUSphinx4QtComponent.cpp
                  mtsCMUSphinx4QtWidget.cpp
                  ${QT_WRAPPED_CPP})

@@ -1,7 +1,7 @@
 #
 # $Id$
 #
-# (C) Copyright 2011 Johns Hopkins University (JHU), All Rights
+# (C) Copyright 2011-2012 Johns Hopkins University (JHU), All Rights
 # Reserved.
 #
 # --- begin cisst license - do not edit ---
@@ -12,8 +12,6 @@
 #
 # --- end cisst license ---
 
-# for generated config files
-include_directories (${CMAKE_CURRENT_BINARY_DIR})
-
+project (sawCMUSphinx4)
 add_subdirectory (code)
 add_subdirectory (examples)

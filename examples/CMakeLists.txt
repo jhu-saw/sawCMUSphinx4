@@ -1,7 +1,7 @@
 #
 # $Id$
 #
-# (C) Copyright 2011 Johns Hopkins University (JHU), All Rights
+# (C) Copyright 2011-2012 Johns Hopkins University (JHU), All Rights
 # Reserved.
 #
 # --- begin cisst license - do not edit ---
@@ -25,6 +25,8 @@ if (cisst_FOUND)
 
   # sawCMUSphinx4 has been compiled within cisst, we should find it automatically
   # find_package (sawCMUSphinx4 REQUIRED HINTS "${cisst_saw_BINARY_DIR}/saw/components")
+  # temporary hack until sawCMUSphinx4Config.cmake is generated
+  include_directories ("${sawCMUSphinx4_SOURCE_DIR}/include" "${sawCMUSphinx4_BINARY_DIR}")
 
   # example with Qt
   get_filename_component (JAVA_LIBRARY_DIR ${JAVA_AWT_LIBRARY} PATH)
